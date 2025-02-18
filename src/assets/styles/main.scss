@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&family=Material+Symbols+Rounded&family=Material+Symbols+Sharp');
+@import "bootstrap/scss/bootstrap";
+@import "./_reset";
+@import "./_variables";
+@import "./_bootstrap_extend";
+@import "./_theme";
+@import "./veterinary.scss";
+
+body {
+  line-height: 1;
+  background-color: $bg-primary;
+  color: $text-primary;
+  font-family: "Kosugi Maru", sans-serif;
+}
+
+main {
+  overflow: hidden;
+}
+
+.hv100-with-nav {
+  //nav py-1  + logo 44px
+  height: calc(100vh - 0.5rem * 2 - 44px);
+}
+
+.brand {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  color: $text-secondary;
+  gap: $gap-1;
+  user-select: none;
+}
+
+.section-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $gap-4;
+  margin-inline: auto;
+  color: $text-secondary;
+}
+
+.section-title::before {
+  content: "";
+  width: 3rem;
+  height: 0.25rem;
+  background-color: $text-secondary;
+}
+
+@import "./Navbar";
+@import "./Footer";
+@import "./Home";
