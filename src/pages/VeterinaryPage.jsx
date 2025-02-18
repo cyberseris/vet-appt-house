@@ -8,14 +8,15 @@ import banner01 from '@/assets/images/veterinary/banner01.png';
 import banner02 from '@/assets/images/veterinary/banner02.png';
 import banner03 from '@/assets/images/veterinary/banner03.png';
 
-const VeterinaryPage = () => {
-  const [index, setIndex] = useState(0);
   const images = [
     banner01,
     banner02,
     banner03
   ];
 
+const VeterinaryPage = () => {
+  const [index, setIndex] = useState(0);
+  
   useEffect(()=>{
     const interval = setInterval(()=>{
       setIndex((preIndex)=>(preIndex+1) % images.length);
