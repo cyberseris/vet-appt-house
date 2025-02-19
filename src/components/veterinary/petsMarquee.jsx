@@ -14,7 +14,7 @@ import pet12 from '@/assets/images/veterinary/pet-12.jpg';
 import pet13 from '@/assets/images/veterinary/pet-13.jpg';
 
 const images = [pet1,pet2,pet3,pet4,pet5,pet6,pet7]
-//console.log(images[0].split('/')[-1].split('.jpg'))
+
 const PetsMarquee = () => {
     return (
         <>

@@ -1,6 +1,7 @@
 {
   "name": "vet-appt-house",
   "private": true,
+  "homepage": "https://cyberseris.github.io/vet-appt-house/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {

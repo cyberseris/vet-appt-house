@@ -18,7 +18,7 @@ const services = [
         title:"24 小時急診",
         content: "全年無休的急診服務，緊急時刻第一時間為毛孩提供救助與關懷。",
         imgUrl:"../src/assets/images/veterinary/10.jpg"
-    },
+    }
 ]
 
 const VetServiceCards = () => {
@@ -40,7 +40,6 @@ const VetServiceCards = () => {
                         )
                     })
                 }
-               
             </div>
         </>
     );
