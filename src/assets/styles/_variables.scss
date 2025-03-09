@@ -1,0 +1,61 @@
+$primary-blue-0: #f1f7ff;
+$primary-blue-1: #052e5a;
+$primary-blue-2: #083d77;
+$primary-blue-3: #0e4581;
+$primary-blue-4: #82aad6;
+$primary-blue-5: #e6effb;
+$primary-blue-6: #f2f8ff;
+
+$grey-scale-1: #0a0a0a;
+$grey-scale-2: #595959;
+$grey-scale-3: #9b9b9b;
+$grey-scale-4: #f5fbff;
+$grey-scale-5: #f9f9f9;
+$grey-scale-6: #ffffff;
+$grey-scale-6o: #ffffffcc;
+$grey-scale-7: #ffffff80;
+
+$error-1: #ba0000;
+$reminder: #ffebeb;
+$secondary-1: #fff27c;
+$secondary-2: #ffef61;
+$secondary-3: #fdee6b;
+
+$bg-primary: $primary-blue-6;
+$bg-secondary: $primary-blue-5;
+$bg-tertiary: $grey-scale-1;
+$bg-quaternary: $secondary-2;
+$bg-disabled: $grey-scale-5;
+$bg-error: $error-1;
+
+$text-primary: $grey-scale-1;
+$text-secondary: $primary-blue-2;
+$text-tertiary: $grey-scale-2;
+$text-disabled: $grey-scale-3;
+$text-error: $error-1;
+
+$line-primary: $primary-blue-5;
+$line-secondary: $primary-blue-6;
+$line-error: $error-1;
+
+$break-sm: 576px;
+$break-md: 768px;
+$break-lg: 992px;
+$break-xl: 1200px;
+$break-xxl: 1400px;
+$breakpoint: $break-md;
+//nav py-1  + logo 44px
+$nav-height: calc(0.5rem * 2 + 44px);
+$hv100-with-nav: calc(100vh - $nav-height);
+$hv100-nav-n-foot: calc($hv100-with-nav - 396px);
+
+$gap-1: 0.25rem;
+$gap-2: 0.5rem;
+$gap-3: 1rem;
+$gap-4: 1.5rem;
+$gap-5: 3rem;
+$gap-6: 4.5rem;
+$gap-7: 6rem;
+$gap-8: 7.5rem;
+
+$gap-1d5: 0.75rem;

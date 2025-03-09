@@ -1,0 +1,83 @@
+@import "bootstrap/scss/bootstrap";
+@import "./_reset";
+@import "./_variables";
+@import "./_bootstrap_extend";
+@import "./_theme";
+
+body {
+  line-height: 1;
+  background-color: $bg-primary;
+  color: $text-primary;
+  font-family: "Kosugi Maru", sans-serif;
+  overflow-x: hidden;
+}
+
+main {
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: $bg-primary;
+}
+
+body::-webkit-scrollbar-track {
+  background-image: linear-gradient($bg-secondary $nav-height,$bg-primary $nav-height);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $primary-blue-5;
+  border: 1px solid $primary-blue-4;
+  border-radius: 20px;
+  
+}
+
+.hv100-with-nav {
+  min-height: $hv100-with-nav;
+}
+
+.hv100-with-nav-force {
+  max-height: $hv100-with-nav;
+}
+
+.hv100-nav-n-foot {
+  min-height: $hv100-nav-n-foot;
+}
+
+.brand {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  color: $text-secondary;
+  gap: $gap-1;
+  user-select: none;
+}
+
+.section-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $gap-4;
+  margin-inline: auto;
+  color: $text-secondary;
+}
+
+.section-title::before {
+  content: "";
+  width: 3rem;
+  height: 0.25rem;
+  background-color: $text-secondary;
+}
+
+@import "./Navbar";
+@import "./Footer";
+@import "./Paginator";
+@import "./Home";
+@import "./Login";
+@import "./Pets";
+@import "./VetSearch";
+@import "./veterinary.scss";
+@import "./Booking.scss";

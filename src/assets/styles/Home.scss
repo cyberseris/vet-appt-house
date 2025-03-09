@@ -1,0 +1,375 @@
+.home-header {
+  user-select: none;
+  .container {
+    gap: 7.5rem;
+    @include mobile {
+      gap: 5.25rem;
+    }
+  }
+  .title {
+    gap: 1.5rem;
+    @include mobile {
+      gap: 2.5rem;
+    }
+    .logo {
+      width: 340px;
+      height: 108px;
+      @include mobile {
+        width: 60px;
+        height: 180px;
+      }
+    }
+  }
+  .content {
+    gap: 3rem;
+    @include mobile {
+      gap: 3.75rem;
+    }
+  }
+  .action {
+    @include mobile {
+      flex-direction: column;
+    }
+  }
+
+  .hero-container {
+    img {
+      width: 854px;
+      height: 372px;
+      @include mobile {
+        width: 212px;
+        height: 90px;
+      }
+    }
+    position: relative;
+    &::after {
+      content: "";
+      pointer-events: none;
+      position: absolute;
+      width: 1920px;
+      height: 1080px;
+      @extend %bg-center;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      @include mobile {
+        content: none;
+      }
+    }
+    &.deco-1::after {
+      background-image: url("@/assets/images/home/deco-glasses.png");
+    }
+    &.deco-2::after {
+      background-image: url("@/assets/images/home/deco-party.png");
+    }
+  }
+}
+
+.home {
+  section {
+    display: flex;
+    flex-direction: column;
+    padding-block: 7.5rem;
+    padding-inline: 2.5rem;
+    @include mobile {
+      padding-block: 2.5rem 3.75rem;
+      padding-inline: 0.75rem;
+    }
+  }
+
+  .find-vet {
+    background-image: url("@/assets/images/home/vet-pointing-black-dog.png");
+    @extend %bg-center;
+    align-items: center;
+    @media (max-width: 120rem) {
+      background-size: auto;
+      overflow: hidden;
+    }
+    @include mobile {
+      background-image: url("@/assets/images/home/bg-footprints.png");
+      backdrop-filter: invert(1);
+      background-size: cover;
+    }
+
+    form {
+      $width: 32.875rem;
+      padding: 3.75rem;
+      gap: 2.25rem;
+      width: $width;
+      border-radius: 2.5rem;
+      margin-top: 3.5rem;
+      transform: translateX(-50%);
+      @media (max-width: calc($width *2 + 19.5rem)) {
+        transform: unset;
+      }
+      @include mobile {
+        border-radius: 1.25rem;
+        margin-top: 1.5rem;
+        padding: 1.5rem;
+        gap: 1.5rem;
+        max-width: 30rem;
+        width: unset;
+        .row-group {
+          flex-direction: column;
+        }
+      }
+      .date-picker {
+        width: 100%;
+      }
+      .custom-checkbox {
+        padding-block: 0.75rem;
+        white-space: nowrap;
+        font-size: 14.32px;
+        line-height: 21.48px;
+        font-family: "Roboto";
+      }
+    }
+  }
+
+  .background-pattern {
+    background-image: url("@/assets/images/home/bg-pattern-2.png");
+    background-size: 100% auto;
+    background-repeat: repeat-y;
+    overflow: hidden;
+    padding-bottom: 10.625rem;
+    @include mobile {
+      padding-bottom: 0;
+    }
+  }
+
+  .site-services {
+    .content {
+      margin-top: 5rem;
+      width: 67.25rem;
+      @media (max-width: 67.25rem) {
+        width: 100%;
+      }
+      @include mobile {
+        margin-top: 2.25rem;
+        flex-direction: column;
+      }
+      .service {
+        padding: 1.25rem 2.5rem;
+        flex: 1;
+        @include mobile {
+          padding: 0.5rem 2.5rem;
+          gap: 0.75rem;
+        }
+        img {
+          width: 6rem;
+          height: 6rem;
+        }
+        p {
+          max-width: 300px;
+        }
+      }
+    }
+  }
+
+  .view-more {
+    padding: 0.75rem;
+  }
+
+  .news {
+    .news-card {
+      max-width: 450px;
+      background-color: $primary-blue-6;
+      border: 1px solid $line-primary;
+      border-radius: 1.25rem;
+      padding: 1.5rem;
+      p {
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+        -webkit-box-align: end;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      input:checked + p {
+        display: block;
+      }
+      input:checked ~ label {
+        display: none;
+      }
+    }
+    .news-board {
+      $radius: 2.5rem;
+      margin-top: 5rem;
+      width: 67.25rem;
+      position: relative;
+      @media (max-width: $break-xl) {
+        max-width: 67.25rem;
+        width: 100%;
+      }
+      aside {
+        border: 2px solid $line-primary;
+        border-top-left-radius: $radius;
+        border-bottom-left-radius: $radius;
+        .news-empty {
+          height: 496px;
+        }
+        div {
+          cursor: pointer;
+          padding: calc(2.5rem - 0.9px) 2.5rem;
+          border-bottom: 1px solid transparent;
+          background-color: $bg-secondary;
+          &:first-child {
+            border-top-left-radius: $radius;
+          }
+          &:last-child {
+            border-bottom-left-radius: $radius;
+          }
+          &:not(:last-child) {
+            border-bottom-color: $line-secondary;
+          }
+          &.selected {
+            background-color: $bg-primary;
+            border-color: $line-primary;
+            position: relative;
+            &::before,
+            &::after {
+              content: "";
+              @extend %bg-center;
+              position: absolute;
+            }
+            &::before {
+              background-image: url("@/assets/images/home/can.svg");
+              width: 58.03px;
+              height: 45.18px;
+              top: 15px;
+              left: -20px;
+            }
+            &::after {
+              background-image: url("@/assets/images/home/hearts.svg");
+              width: 23.42px;
+              height: 16.47px;
+              bottom: 10px;
+              right: 10px;
+            }
+            p {
+              color: $text-primary;
+            }
+          }
+          p {
+            margin: 0 1.625rem;
+            white-space: nowrap;
+            color: $text-tertiary;
+          }
+        }
+      }
+      .content {
+        padding: 3.75rem;
+        gap: 2.5rem;
+        border: 0.125rem solid $line-primary;
+        border-left: none;
+        border-radius: 0 $radius $radius 0;
+      }
+      .decorate-img {
+        aspect-ratio: 300/197;
+        position: absolute;
+        bottom: -8px;
+        right: -28px;
+        @media (max-width: 960px) {
+          width: 180px;
+        }
+      }
+    }
+  }
+
+  .featured-clinic {
+    .container {
+      margin-top: 5rem;
+      .swiper {
+        width: 81rem;
+      }
+      .swiper-slide {
+        width: auto !important;
+      }
+      .more {
+        position: absolute;
+        top: -5rem;
+        right: 0;
+        transform: translateY(-100%);
+      }
+      .prev-button,
+      .next-button {
+        width: 2.5rem;
+        height: 2.5rem;
+        border: none;
+        background-color: transparent;
+        padding: 0;
+        perspective: 100px;
+        transition: transform 1s;
+        .icon {
+          background: $text-secondary;
+        }
+        &:hover {
+          transform: rotateX(-180deg);
+          .icon {
+            animation: 0.4s 0.5s ease-in alternate infinite;
+          }
+        }
+      }
+      .next-button:hover,
+      .prev-button {
+        .icon {
+          transform: rotate(90deg);
+          animation-name: forward;
+        }
+      }
+
+      .prev-button:hover,
+      .next-button {
+        .icon {
+          transform: rotate(-90deg);
+          animation-name: backward;
+        }
+      }
+      @keyframes backward {
+        0% {
+          transform: translateX(0) rotate(-90deg);
+        }
+        100% {
+          transform: translateX(-10px) rotate(-90deg);
+        }
+      }
+      @keyframes forward {
+        0% {
+          transform: translateX(0) rotate(90deg);
+        }
+        100% {
+          transform: translateX(10px) rotate(90deg);
+        }
+      }
+    }
+
+    .card {
+      width: 342.67px;
+      border-radius: 1.25rem;
+      background-color: $grey-scale-7;
+      padding: 1.25rem 1.25rem 1.5rem 1.25rem;
+      gap: 2.25rem;
+      &:hover {
+        background-color: $grey-scale-6;
+      }
+      &:has(.btn-s:active) {
+        background-color: $grey-scale-7;
+      }
+      img {
+        width: 18.75rem;
+        height: 12.5rem;
+        border-radius: 0.5rem;
+      }
+      p {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        -webkit-box-align: end;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-block: 1.5px;
+        vertical-align: bottom;
+      }
+    }
+  }
+}

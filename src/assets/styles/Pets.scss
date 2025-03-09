@@ -1,0 +1,224 @@
+.my-pets {
+  header {
+    background-color: $bg-secondary;
+    background-image: url("@/assets/images/pet/pet-bg.png");
+    @extend %bg-center;
+    height: 400px;
+    padding-block: 200px 142px;
+    margin-top: calc($nav-height * -1);
+    @include mobile {
+      background-image: url("@/assets/images/pet/pet-bg-mobile.png");
+      height: 200px;
+      padding-block: 100px 64px;
+    }
+  }
+  .pet-list {
+    background-color: $bg-primary;
+    padding: 60px 160px;
+    @media (max-width: $break-lg) {
+      padding-inline: 64px;
+    }
+    @include mobile {
+      background-color: $bg-secondary;
+      padding: 24px 12px 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+    .poker-box {
+      padding: 40px 64px;
+    }
+    .pet-card {
+      margin-left: 5%;
+      padding: 24px;
+      gap: 24px;
+      position: relative;
+      user-select: none;
+      border-radius: 40px;
+      background-color: $grey-scale-6;
+      box-shadow: 0px 5px 5px 0px #0001;
+      @media (max-width: $break-xxl) {
+        flex-direction: column;
+        margin-left: 12%;
+      }
+      @media (max-width: $break-xl) {
+        margin-left: 0;
+      }
+      @include mobile {
+        box-shadow: none;
+        padding: 16px;
+        border-radius: 20px;
+        gap: 12px;
+      }
+      .avatar-wrapper,
+      .avatar {
+        min-width: 392px !important;
+        width: 392px !important;
+        aspect-ratio: 10/9;
+        @media (max-width: $break-lg) {
+          width: 319px !important;
+          height: 223px !important;
+          min-width: 319px !important;
+          min-height: 223px !important;
+          aspect-ratio: unset;
+        }
+      }
+      .info {
+        flex: 1;
+        width: 392px;
+        padding-block: 16px;
+        gap: 24px;
+        @media (max-width: $break-xxl) {
+          width: auto;
+        }
+        @include mobile {
+          padding: 0;
+          gap: 12px;
+        }
+        .detail {
+          gap: 12px;
+          @include mobile {
+            gap: 4px;
+          }
+          .field {
+            gap: 4px;
+            @include mobile {
+              gap: 0;
+            }
+          }
+        }
+        label {
+          font-family: Roboto;
+          font-size: 14px;
+          line-height: 22px;
+          @include mobile {
+            font-size: 0.875rem !important;
+            line-height: 1.375rem;
+          }
+        }
+      }
+      .title {
+        gap: 4px;
+        @include mobile {
+          gap: 0;
+          .specie {
+            font-size: 0.875rem !important;
+            line-height: 1.375rem;
+            font-family: "Roboto";
+            font-weight: 400;
+          }
+        }
+      }
+      .pet-name {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: 100%;
+        @include mobile {
+          font-size: 1.25rem !important;
+          line-height: 1.5rem;
+          font-family: "Roboto";
+          font-weight: 600;
+        }
+      }
+      .edit-btn-desk {
+        border: none;
+        background-color: transparent;
+        padding: 8px 12px;
+        display: flex;
+        gap: 8px;
+        @include mobile {
+          display: none;
+        }
+      }
+      .edit-btn-mobile {
+        border: 1px solid $grey-scale-1;
+        color: $text-primary;
+        background-color: transparent;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        &:active {
+          background-color: $bg-tertiary;
+          color: $grey-scale-6;
+        }
+        @include mobile {
+          display: flex;
+        }
+      }
+    }
+  }
+  .pat-card-swiper {
+    max-width: 100%;
+    min-width: 100%;
+    .swiper-slide {
+      padding: 10px;
+      &:not(.swiper-slide-active) .pet-card::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(
+          to left,
+          #fff,
+          transparent 45%,
+          transparent 55%,
+          #fff
+        );
+        background-blend-mode: color;
+        border-radius: 40px;
+        z-index: 1;
+      }
+    }
+  }
+  .poker-navigator {
+    button {
+      border: none;
+      background-color: transparent;
+      padding: 0;
+      width: 40px;
+      height: 40px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      .icon {
+        background-color: #999;
+      }
+      &.prev-button {
+        .icon {
+          transform: rotate(90deg);
+        }
+      }
+      &.next-button {
+        .icon {
+          transform: rotate(-90deg);
+        }
+      }
+    }
+    .outside-pagination {
+      flex: 1;
+      align-self: center;
+      display: flex;
+      gap: 8px;
+      padding: 8px;
+      align-items: center;
+      .swiper-pagination-bullet {
+        opacity: 1;
+        background: #999;
+        width: 12px;
+        height: 12px;
+        &-active {
+          background: $primary-blue-2;
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+  }
+  .view-more {
+    padding: 0.75rem;
+  }
+}

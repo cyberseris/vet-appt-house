@@ -1,0 +1,389 @@
+// background
+.bg-primary {
+  background-color: $bg-primary !important;
+}
+.bg-secondary {
+  background-color: $bg-secondary !important;
+}
+.bg-tertiary {
+  background-color: $bg-tertiary !important;
+}
+.bg-quaternary {
+  background-color: $bg-quaternary !important;
+}
+.bg-disabled {
+  background-color: $bg-disabled !important;
+}
+.bg-error {
+  background-color: $bg-error !important;
+}
+
+%bg-center {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+// text
+.text-primary {
+  color: $text-primary !important;
+}
+.text-secondary {
+  color: $text-secondary !important;
+}
+.text-tertiary {
+  color: $text-tertiary !important;
+}
+.text-quaternary {
+  color: $grey-scale-6 !important;
+}
+.text-disabled {
+  color: $text-disabled !important;
+}
+.text-error {
+  color: $text-error !important;
+}
+
+@mixin fs-template($size, $height) {
+  font-size: $size !important;
+  line-height: $height;
+  font-family: "Roboto";
+}
+$font-style-list: (2.5rem, 3.75rem), (2rem, 3rem), (1.75rem, 2.625rem),
+  (1.5rem, 2.25rem), (1.25rem, 1.875rem), (1rem, 1.5rem), (0.875rem, 1.375rem);
+
+@each $font-style in $font-style-list {
+  $i: index($font-style-list, $font-style);
+
+  .fs-#{$i} {
+    @include fs-template(nth($font-style, 1), nth($font-style, 2));
+  }
+}
+
+$heading-style-list: (2.5rem, 3rem), (2rem, 2.4rem), (1.75rem, 2.1rem),
+  (1.5rem, 1.8rem), (1.25rem, 1.5rem), (1rem, 1.2em);
+
+@each $heading-style in $heading-style-list {
+  $i: index($heading-style-list, $heading-style);
+
+  h#{$i},
+  .h#{$i} {
+    @include fs-template(nth($heading-style, 1), nth($heading-style, 2));
+    @if $i == 6 {
+      font-weight: 500;
+    } @else {
+      font-weight: 600;
+    }
+  }
+}
+
+.d1 {
+  font-size: 3rem !important;
+  line-height: 57.6px;
+  font-family: "Kosugi Maru";
+  font-weight: 400;
+}
+
+.d2 {
+  font-size: 1.5rem !important;
+  line-height: 2.25rem;
+  font-family: "Kosugi Maru";
+  font-weight: 400;
+}
+
+// button
+%btn-attr {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  border: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn {
+  &-xs {
+    padding: 0.5rem 1rem;
+    border-radius: 6.25rem;
+    gap: 0.5rem;
+    @extend %btn-attr;
+    @extend .h6;
+  }
+
+  &-s {
+    padding: 0.75rem 1rem;
+    border-radius: 2.5rem;
+    gap: 0.25rem;
+    @extend %btn-attr;
+    @extend .fs-6;
+  }
+
+  &-m {
+    padding: 0.75rem 1.5rem;
+    border-radius: 2.5rem;
+    gap: 0.5rem;
+    @extend %btn-attr;
+    @extend .h5;
+  }
+
+  &-l {
+    padding: 1.25rem 0;
+    border-radius: 2.75rem;
+    gap: 0.5rem;
+    @extend %btn-attr;
+    @extend .h4;
+  }
+}
+
+.btn-primary,
+.btn-primary:hover {
+  background-color: $bg-tertiary;
+  color: $grey-scale-5;
+  &:active {
+    background-color: $bg-tertiary !important;
+    color: $grey-scale-3 !important;
+  }
+}
+.btn-secondary {
+  background-color: $bg-quaternary;
+  color: $text-primary;
+  &:hover {
+    background-color: $secondary-1;
+    color: $text-primary;
+  }
+  &:active {
+    background-color: $secondary-3 !important;
+    color: $text-primary !important;
+  }
+}
+.btn-tertiary {
+  background-color: $bg-primary;
+  color: $text-primary;
+  &:hover {
+    background-color: #e6effb;
+    color: $text-primary;
+  }
+  &:active {
+    background-color: $bg-secondary !important;
+    color: $text-primary !important;
+  }
+}
+.btn-quaternary {
+  background-color: $primary-blue-3;
+  color: $grey-scale-5;
+  &:hover {
+    background-color: $primary-blue-1;
+    color: $grey-scale-5;
+  }
+  &:active {
+    background-color: $bg-secondary !important;
+    color: $text-primary !important;
+  }
+}
+
+.btn-quaternary {
+  background-color: $primary-blue-3;
+  color: $grey-scale-5;
+
+  &:hover {
+    background-color: $primary-blue-1;
+    color: $grey-scale-5;
+  }
+
+  &:active {
+    background-color: $bg-secondary !important;
+    color: $text-primary !important;
+  }
+}
+
+.btn-outline-quaternary {
+  background-color: transparent; // 透明背景
+  border: 1px solid $primary-blue-3; // 外框顏色
+  color: $primary-blue-3; // 文字顏色
+
+  &:hover {
+    background-color: $primary-blue-1; // 滑鼠懸停時的背景
+    color: $grey-scale-5; // 文字顏色
+  }
+
+  &:active {
+    background-color: $bg-secondary !important;
+    color: $text-primary !important;
+  }
+}
+
+// input
+label:has(input:disabled),
+.input-field:has(input:disabled) label {
+  color: $text-disabled !important;
+  cursor: not-allowed;
+}
+label:has(input.error),
+.input-field:has(input.error) label {
+  color: $text-error !important;
+}
+.input-text {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  @extend .fs-6;
+  &::placeholder {
+    color: $text-disabled;
+  }
+  &:focus {
+    outline: 1px solid $primary-blue-4;
+  }
+  &:disabled {
+    background-color: $bg-disabled;
+    color: $text-disabled;
+  }
+  &.error {
+    color: $text-error;
+    outline: 1px solid $error-1;
+    &::placeholder {
+      color: $text-error;
+    }
+  }
+  &:is(:-webkit-autofill, :autofill) {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: $text-primary;
+    box-shadow: inset 0 0 20px 20px $grey-scale-6;
+    @extend .fs-6;
+  }
+  &-primary {
+    background-color: $grey-scale-6;
+    color: $text-primary;
+    @extend .input-text;
+  }
+}
+.custom-checkbox {
+  user-select: none;
+  input[type="checkbox"] {
+    display: none;
+  }
+  &::before {
+    content: "";
+    width: 24px;
+    height: 24px;
+    background-image: url("@/assets/icons/uncheck-box.svg");
+  }
+  &:has(input[type="checkbox"]:checked)::before {
+    background-image: url("@/assets/icons/check-box.svg");
+  }
+}
+
+// RWD
+@mixin mobile {
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+// icon
+.icon {
+  display: inline-block;
+  mask: no-repeat center;
+  background-color: currentColor;
+}
+
+// img
+.img-alt {
+  display: none;
+}
+img.d-none + .img-alt {
+  display: inline;
+}
+
+// toast
+.Toastify__toast-container {
+  margin-top: $nav-height;
+}
+
+.toast-primary {
+  background-color: $bg-secondary !important;
+  color: $text-secondary !important;
+  .Toastify__close-button svg {
+    fill: $text-secondary;
+  }
+}
+.toast-success {
+  background-color: #2b2 !important;
+  color: #eee !important;
+}
+.toast-error {
+  background-color: $bg-error !important;
+  color: #eee !important;
+}
+
+// date picker
+.date-picker {
+  width: 100%;
+  @extend .fs-6;
+  padding: 10px 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  &:focus {
+    outline: 1px solid $primary-blue-4;
+  }
+}
+.date-picker-calendar {
+  @extend .fs-6;
+  user-select: none;
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0px 3px 10px 0px #0000001f;
+  transform: translateY(-8px);
+  .react-datepicker__header {
+    background: transparent;
+    border: none;
+  }
+  .react-datepicker__current-month {
+    @extend .fs-6;
+    font-weight: 400;
+  }
+  .react-datepicker__day-name {
+    color: $grey-scale-3;
+  }
+  .react-datepicker__day--selected {
+    background-color: $bg-tertiary;
+    border-radius: 50%;
+    &:hover {
+      background-color: $bg-tertiary;
+      opacity: 0.7;
+    }
+  }
+  .react-datepicker__day:hover,
+  .react-datepicker__day--keyboard-selected {
+    border-radius: 50%;
+  }
+}
+.react-datepicker__triangle {
+  display: none;
+}
+.react-datepicker__close-icon {
+  position: absolute;
+  top: 50%;
+  right: calc(1rem + 24px);
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+}
+
+.react-datepicker__close-icon::after {
+  font-size: 14px;
+  font-weight: bold;
+  color: #ccc;
+  background-color: transparent !important;
+}
+.react-datepicker__close-icon:hover::after {
+  color: $grey-scale-3 !important;
+}

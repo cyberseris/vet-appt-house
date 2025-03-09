@@ -1,0 +1,180 @@
+@import './variables';
+@mixin pc {
+    @media(min-width: 992px) {
+        @content;
+    }
+}
+
+//**********************
+// utils
+//**********************
+.user, .userPrts, .userAppointments{
+
+    .bg-reminder{
+        background-color: #FFEBEB;
+    }
+    
+    .text-grey-scale-2{
+        color: $grey-scale-2;
+    }
+    
+    .text-grey-scale-3{
+        color: $grey-scale-3;
+    }
+    
+    .btn-outline-primary {
+        color: $grey-scale-1 !important;
+        border-color: $grey-scale-1 !important;
+    
+        // svg path{
+        //     fill: $grey-scale-1 !important;
+        // }
+        &:active,&:hover,&:focus-visible{
+            color: #fff !important;
+            background-color: $grey-scale-1 !important;
+    
+            // svg path{
+            //     fill: #fff !important;
+            // }
+        }
+        &:focus-visible{
+            box-shadow: 0 0 0 0.25rem 
+            rgba(89, 89, 89, .5) !important;
+        }
+    }
+    
+    .btn-primary{
+        font-weight: 600;
+        color: #fff !important;
+        border-color: $grey-scale-1 !important;
+        &:hover{
+            color: $grey-scale-3 !important;
+        }
+    }
+    
+    .btn-light{
+        font-weight: 400 !important;
+        color: $grey-scale-1 !important;
+        border: none !important;
+        background-color: $grey-scale-5 !important;
+        &:hover{
+            border: none !important;
+            background-color: $grey-scale-4 !important;
+        }
+    }
+    
+    a {
+        color:$primary-blue-2 !important;
+        text-decoration: none !important;
+    }
+}
+
+//**********************
+// custom
+//**********************
+.user {
+    &.bg-cover{
+        background: url("../images/user/bg.png") no-repeat center;
+        background-size: cover;
+        // height: 875px;
+    }
+
+    h2.title{
+        font-size: 24px !important;
+    }
+
+    .form-label{
+        color: $grey-scale-2;
+    }
+
+    .form-control, .form-select{
+        background-color: $grey-scale-5;
+        border: none;
+        &:focus-visible{
+            box-shadow: 0 0 0 0.25rem 
+            rgba(89, 89, 89, .5) !important;
+        }
+    }
+
+
+    @include pc{
+        .container{
+            padding-top: 84px;
+            padding-bottom: 120px;
+        }
+        h2.title{
+            font-size: 32px !important;
+        }
+    }
+}
+
+.userPrts{
+    &.bg-cover{
+        background-color: $primary-blue-5;
+        padding-top:120px;
+        padding-bottom:120px;
+    }
+    
+      @include pc{
+        &.bg-cover{
+            padding-top:40px;
+            padding-bottom:58px;
+        }
+        .add-pet span{
+            writing-mode: vertical-rl
+        }
+      }
+}
+
+
+.userAppointments{
+    &.bg-cover{
+        background-color: $primary-blue-6;
+        padding-top:120px;
+        padding-bottom:120px;
+    }
+
+    ul.appoint-tags li+li{
+        margin-left: 1.5rem;
+    }
+
+    ul.appoint-tags a {
+        background-color: #fff;
+        color: $primary-blue-1;
+        padding: 16px 32px;
+        border: none;
+        display: inline-block;
+        &.active{
+            background-color: $primary-blue-5;
+            color: $primary-blue-1;
+        }
+    }
+
+    .swiper {
+        width: 100%;
+    }
+
+    .swiper-slide {
+        width: auto !important;
+    }
+
+    div.appoint-status{
+        padding: 4px 8px;
+        font-size: 14px;
+        border-radius: 8px;
+        line-height: 1.5;
+        color: $grey-scale-3;
+        border: 1px $grey-scale-3 solid;
+        &.active{
+            color: $grey-scale-1;
+            border: 1px $grey-scale-1 solid;
+        }
+    }
+
+    @include pc{
+        &.bg-cover{
+            padding-top:40px;
+            padding-bottom:58px;
+        }
+      }
+}

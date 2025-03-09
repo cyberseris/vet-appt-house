@@ -1,0 +1,67 @@
+.footer {
+  background-color: $bg-secondary;
+  padding: 7.5rem 19.5rem;
+  position: relative;
+  @media (max-width: $break-xxl) {
+    padding: 3rem 7.5rem;
+  }
+  @media (max-width: $break-lg) {
+    padding-inline: 3rem;
+  }
+  @include mobile {
+    padding-block: 2.5rem 3.75rem;
+    padding-inline: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .mobile-link {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .footer-left {
+    width: 306px;
+  }
+
+  .brand {
+    gap: 5.45px;
+    .icon-logo {
+      height: 3.75rem;
+      width: 3.75rem;
+    }
+    .text-logo {
+      height: 27.27px;
+      width: 81.82px;
+    }
+  }
+  .copyright {
+    color: #6f6f6f;
+  }
+
+  .link-container {
+    width: 100%;
+    max-width: 53.5rem;
+    .list {
+      @media (max-width: $break-xxl) {
+        text-align: end;
+      }
+      h6 {
+        padding: 1rem 0;
+        .link {
+          margin-block: 0.4px;
+        }
+      }
+    }
+  }
+
+  img.footer-decoration {
+    user-select: none;
+    pointer-events: none;
+    position: absolute;
+    top: 50px;
+    right: 207px;
+    transform: translateY(-100%);
+  }
+}

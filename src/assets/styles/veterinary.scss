@@ -1,0 +1,375 @@
+@import url("https://fonts.googleapis.com/css?family=Kosugi+Maru");
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+
+.Kosugi-Maru {
+  font-family: "Kosugi Maru";
+  font-weight: 400;
+}
+
+.roboto {
+  font-family: "roboto";
+  font-weight: 500;
+}
+
+.veterinaryHeader {
+  margin: 0 auto;
+  width: 100%;
+  height: 62.75rem;
+  height: $hv100-with-nav;
+  @extend %bg-center;
+  @include mobile {
+    height: 50.75rem;
+  }
+  .container {
+    @include mobile {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+.bubble {
+  position: relative;
+
+  .bubbleJpg {
+    width: 32.875rem !important;
+    height: 22.6875rem !important;
+
+    @include mobile {
+      display: none;
+    }
+  }
+
+  .vetBannerTitle {
+    position: absolute;
+    left: 6.875rem;
+    top: 3.75rem;
+
+    @include mobile {
+      text-align: center;
+      position: static;
+      h5 {
+        margin-bottom: 3rem !important;
+      }
+      .btn-m {
+        margin: 0 auto;
+        margin-top: 6rem !important;
+      }
+    }
+  }
+
+  .bannerJpg {
+    position: absolute;
+    z-index: 3;
+    left: -20.3125rem;
+    bottom: -8.4375rem;
+
+    .image {
+      width: 122.5rem;
+      height: 67.5rem;
+    }
+
+    @include mobile {
+      display: none;
+    }
+  }
+
+  @include mobile {
+    position: static;
+  }
+}
+
+.text-fade-in {
+  animation: fade-in 0.8s linear forwards;
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+.vetService {
+  .container {
+    min-height: 46.875rem;
+    padding: 7.5rem 0rem;
+
+    @include mobile {
+      height: auto !important;
+      padding: 2.5rem 0.75rem;
+    }
+  }
+}
+
+.serviceCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .card {
+    max-width: 21.9375rem !important;
+    height: 25rem !important;
+    margin-bottom: 1.5rem;
+
+    .card-img-top {
+      min-height: 15rem !important; // 它不能設定 height: 15rem !important; 原因待查 =.=
+      max-height: 15rem !important;
+      object-fit: cover;
+    }
+  }
+}
+
+.veterinaryTime {
+  background-image: url("@/assets/images/veterinary/section-03-bg.png");
+  @extend %bg-center;
+  .container {
+    height: 40.625rem;
+    padding: 7.5rem 0rem;
+
+    @media (max-width: "992px") {
+      height: 62.5rem;
+      padding: 2.5rem 0.75rem 0 0;
+    }
+  }
+  .section-title {
+    margin-bottom: 48px;
+    @media (max-width: "992px") {
+      margin-bottom: 24px;
+    }
+  }
+}
+
+.vetTimeTable {
+  display: flex;
+  height: auto;
+  padding: 1.5rem;
+  border-radius: 1.75rem;
+  margin: 0 auto;
+  background-color: $primary-blue-5;
+
+  @media (max-width: 992px) {
+    flex-direction: column;
+    max-width: 21.9375rem;
+    padding: 0 0.75rem;
+    background-color: $primary-blue-6;
+  }
+
+  .timeTable-L {
+    padding: 0.75rem 1.5rem;
+
+    @media (max-width: 992px) {
+      order: 2;
+      max-width: 21.9375rem;
+    }
+
+    .VeterinaryInfo {
+      width: 17.75rem;
+      height: 13.1875rem;
+      /* height: 16.625rem; */
+    }
+  }
+
+  .timeTable-R {
+    order: 1;
+    width: 52rem;
+    padding: 0.75rem 1.5rem;
+
+    @media (max-width: 992px) {
+      padding-top: 0.5rem !important;
+      max-width: 20.4375rem;
+      .table-desktop {
+        display: none;
+      }
+    }
+
+    .table-mobile {
+      display: none;
+      @media (max-width: 992px) {
+        display: block;
+      }
+    }
+  }
+}
+
+.vetlogo {
+  width: 3.25rem;
+  height: 2.625rem;
+}
+
+.phoneIcon {
+  width: 2rem;
+  height: 2rem;
+  z-index: 9;
+}
+
+.petsMarquee {
+  width: 100% !important;
+  height: auto;
+    padding-block: 3.75rem 7.5rem;
+}
+
+.veterinaryTime {
+  position: relative;
+
+  .section03-bg {
+    position: absolute;
+    top: 0;
+  }
+}
+
+.marquee {
+  min-width: 81rem !important;
+  .marqueeImg {
+    width: 15rem;
+    height: 15rem;
+
+    @media (max-width: 992px) {
+      width: 7.5rem;
+      height: 7.5rem;
+    }
+  }
+}
+
+.primary-blue-5 {
+  background-color: $primary-blue-5;
+}
+
+.lh-12 {
+  line-height: 1.2 !important;
+}
+
+.lh-15 {
+  line-height: 1.5 !important;
+}
+
+.lh-38-4 {
+  line-height: 2.4rem;
+}
+
+.lh-22 {
+  line-height: 1.375rem;
+}
+
+.text-primary-blue-4 {
+  color: $primary-blue-4;
+}
+
+.mr-8 {
+  margin-right: 0.5rem !important;
+}
+
+.mr-16 {
+  margin-right: 1rem;
+}
+
+.mr-20 {
+  margin-right: 1.25rem !important;
+}
+
+.m-50-5 {
+  margin: 3.15625rem 0;
+}
+
+.fz-14 {
+  font-size: 0.875rem;
+}
+
+.fz-16 {
+  font-size: 1rem !important;
+}
+
+.fz-18 {
+  font-size: 1.125rem !important;
+}
+
+.fz-20 {
+  font-size: 1.25rem !important;
+}
+
+.fz-24 {
+  font-size: 1.5rem !important;
+}
+
+.fz-28 {
+  font-size: 1.75rem !important;
+}
+
+.fz-30 {
+  font-size: 1.875rem !important;
+}
+
+.fz-32 {
+  font-size: 2rem !important;
+}
+
+.fz-48 {
+  font-size: 3rem !important;
+}
+
+.h-20 {
+  height: 1.25rem;
+}
+
+.h-60 {
+  height: 3.75rem;
+}
+
+.h-116 {
+  height: 7.25rem;
+}
+
+/* .h-240 {
+    min-height: 15rem !important;
+} */
+
+.w-135 {
+  width: 8.4375rem;
+}
+
+.w-70 {
+  width: 4.75rem;
+}
+
+.w-306 {
+  width: 19.125rem;
+}
+
+.bottom-138 {
+  bottom: 8.625rem;
+}
+
+.bottom-187 {
+  bottom: 11.6875rem;
+}
+
+.left-360 {
+  left: 22.5rem;
+}
+
+.fw-400 {
+  font-weight: 400 !important;
+}
+
+.fw-600 {
+  font-weight: 600 !important;
+}
+
+.p-24 {
+  padding: 1.5rem !important;
+}
+
+.mb-16 {
+  margin-bottom: 1rem !important;
+}
+
+.borderRadius-20 {
+  border-radius: 1.25rem;
+}
+
+.borderBottom-1 {
+  border-bottom: 0.0625rem dashed #82aad6;
+}
