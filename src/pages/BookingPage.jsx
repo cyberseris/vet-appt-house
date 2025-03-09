@@ -14,20 +14,33 @@ export default function BookingPage() {
     const modalInstanceRef = useRef(null);
 
     const initialState = {
-      clinicsData:[],
-      serviceOptions:[],
-      speciesOptions:[],
-      petOptions:[],
-      time:[],
-      vetClinicsId:-1,
-      usersId:-1,
-      userName:'',
-      submitData:{},
-      isOpen:false
+      clinic:{
+        clinicsData:[],
+        serviceOptions:[],
+        speciesOptions:[],
+        vetClinicsId:-1
+      },
+      pet:{
+        petOptions:[]
+      },
+      user:{
+        usersId:-1,
+        userName:'',
+      },
+      appointment:{
+        time:[],
+        submitData:{}
+      },
+      ui:{
+        isOpen:false
+      }      
     }
 
     function reducer(state, action){
-      return {...state, ...action}
+      return {...state, ...Object.keys(action).reduce((acc, key) => {
+        acc[key] = {...state[key], ...action[key]};
+        return acc; 
+      },{})}
     }
 
     const [state, dispatch] = useReducer(reducer, initialState);
@@ -44,18 +57,21 @@ export default function BookingPage() {
     }, []);
 
     useEffect(() => {
-        if (state.isOpen) {
+        if (state.ui.isOpen) {
             modalInstanceRef.current?.show();
         } else {
             modalInstanceRef.current?.hide();
         }
-    }, [state.isOpen]);
+    }, [state.ui.isOpen]);
 
     const handleCloseModal = () => {
         const modalInstance = Modal.getInstance(appointmentModalRef.current);
         modalInstance.hide();
         dispatch({
-          isOpen:false
+           ui: {
+            ...state.ui,
+            isOpen:false
+           }
         })
     };
     
@@ -67,21 +83,27 @@ export default function BookingPage() {
       if(isBookingPage){
         try{
             const data =  await api.get(`/vetClinics/${urlParams['clinicId']}`)
-
             const petData =  await api.get(`/pets?userId=1`)
-
             const businessHours = data.data.businessHours
             const day = new Date().getDay();
 
             dispatch({
-              clinicsData:data.data,
-              serviceOptions:data.data.services.map(item=>item.id),
-              speciesOptions:data.data.treatedAnimals.map(item=>item.id),
-              petOptions:petData.data.map(pet=>({id:pet.id,petName:pet.name})),
-              time:[businessHours[0][day-1],businessHours[1][day-1],businessHours[2][day-1]],
-              vetClinicsId:Number(urlParams['clinicId']),
-              usersId:1, //登入功能完成後修改
-              userName:'六角' //登入功能完成後修改
+              clinic: {
+                clinicsData:data.data,
+                vetClinicsId:Number(urlParams['clinicId']),
+                serviceOptions:data.data.services.map(item=>item.id),
+                speciesOptions:data.data.treatedAnimals.map(item=>item.id)
+              },
+              pet:{
+                petOptions:petData.data.map(pet=>({id:pet.id,petName:pet.name}))
+              },
+              user: {
+                usersId:1, //登入功能完成後修改
+                userName:'六角' //登入功能完成後修改
+              },
+              appointment: {
+                time:[businessHours[0][day === 0? 6 : day-1],businessHours[1][day === 0? 6 : day-1],businessHours[2][day === 0? 6 : day-1 ]]
+              }              
             })
         }catch(err){
           console.log("Error: ", err)
@@ -90,13 +112,13 @@ export default function BookingPage() {
       }
 
       fetchData();
-    },[])
+    },[location.pathname, searchParams])
 
     useEffect(() => {
-      if (state.usersId) {
-        console.log("usersId 更新:", state.usersId);
+      if (state.user.usersId) {
+        console.log("usersId 更新:", state.user.usersId);
       }
-    }, [state.usersId]);
+    }, [state.user.usersId]);
 
   const {
     control,
@@ -106,17 +128,19 @@ export default function BookingPage() {
   } = useForm({
     defaultValues:{
       date:new Date(),
-      species:state.speciesOptions[0],
-      department:state.serviceOptions[0],
+      species:state.clinic.speciesOptions[0],
+      department:state.clinic.serviceOptions[0]
     }
   });
 
   const handleDateChange = (date) => {
     const day = date.getDay();
-    const businessHours = state.clinicsData.businessHours
+    const businessHours = state.clinic.clinicsData.businessHours
 
     dispatch({
-      time:[businessHours[0][day-1],businessHours[1][day-1],businessHours[2][day-1]]
+       appointment: {
+        time:[businessHours[0][day === 0? 6 : day-1],businessHours[1][day === 0? 6 : day-1],businessHours[2][day === 0? 6 : day-1]]
+       }
     })
   }
 
@@ -124,29 +148,35 @@ export default function BookingPage() {
     const time = new Date();
     
     dispatch({
-      isOpen:true,
-      submitData:{
-      "species":data.species,
-      "department":data.department,
-      "status": "已預約",
-      "appointmentDateTime": `${data.date.toLocaleString('sv').split(' ')[0]} ${data.time=='上午'?'09:00-12:00':data.time=='下午'?'14:00=17:00':'19:00-22:00'}`,
-      "visitDateTime": "",
-      "isCanceled": false,
-      "createTime": new Date().toLocaleString('sv'),
-      "updateTime": "",
-      "vetClinicsId": state.vetClinicsId,
-      "usersId": state.usersId,
-      "petsId": Number(data.petsId)
-    }
+      ui: {
+        isOpen: true,
+      },
+      appointment: {
+        submitData:{
+          "species":data.species,
+          "department":data.department,
+          "status": "已預約",
+          "appointmentDateTime": `${data.date.toLocaleString('sv').split(' ')[0]} ${data.time=='上午'?'09:00-12:00':data.time=='下午'?'14:00-17:00':'19:00-22:00'}`,
+          "visitDateTime": "",
+          "isCanceled": false,
+          "createTime": new Date().toLocaleString('sv'),
+          "updateTime": "",
+          "vetClinicsId": state.clinic.vetClinicsId,
+          "usersId": state.user.usersId,
+          "petsId": Number(data.petsId)
+        }
+      }
   })
 
   };
 
   const confirmSubmit = async() => {
     dispatch({
-      isOpen:false
+      ui:{
+        isOpen:false
+      }  
     })
-    await axios.post('http://localhost:3000/appointments', state.submitData)
+    await axios.post('http://localhost:3000/appointments', state.appointment.submitData)
     .then(res=>{
       if(res.status===201){
         alert("預約成功")
@@ -173,7 +203,7 @@ export default function BookingPage() {
                 type="text"
                 id="booking-page-name"
                 className={`input-text-primary mb-2`}
-                value={state.userName}
+                value={state.user.userName}
               />
               {/* 填寫寵物物種 */}
               <label className="form-label" htmlFor="booking-page-email">
@@ -181,7 +211,7 @@ export default function BookingPage() {
               </label>
               <select {...register("species", { required: true })} className="form-select mb-2">
                 <option value=''>請選擇物種</option>
-                {state.speciesOptions.map(id=>(<option key={id} value={id}>{speciesLabels[id-1]}</option>)
+                {state.clinic.speciesOptions.map(id=>(<option key={id} value={id}>{speciesLabels[id-1]}</option>)
                 )}
               </select>
               <label className="form-label" htmlFor="booking-page-email">
@@ -190,7 +220,7 @@ export default function BookingPage() {
               <select {...register("department", { required: true })} className="form-select mb-2">
                 <option value=''>請選擇科別</option>
                 {
-                  state.serviceOptions.map(id=>(<option key={id} value={id}>{departmentLabels[id-1]}</option>))
+                  state.clinic.serviceOptions.map(id=>(<option key={id} value={id}>{departmentLabels[id-1]}</option>))
                 }
               </select>
               <label className="form-label" htmlFor="booking-page-date">
@@ -218,7 +248,7 @@ export default function BookingPage() {
               </label>
               <select {...register("time", { required: true })} className="form-select mb-2">
                 <option value=''>請選擇時間</option>
-                {state.time.map((isAvailable, index) =>
+                {state.appointment.time.map((isAvailable, index) =>
                   isAvailable && <option key={index} value={timeLabels[index]}>{timeLabels[index]}</option>
                 )}
               </select> 
@@ -231,7 +261,7 @@ export default function BookingPage() {
               <select {...register("petsId", {required:true})} className="form-select mb-2">
                 <option value=''>請選擇寵物</option>
                   {
-                    state.petOptions.map( (pet) =>(<option key={pet.id} value={pet.id}>{pet.petName}</option>))
+                    state.pet.petOptions.map( (pet) =>(<option key={pet.id} value={pet.id}>{pet.petName}</option>))
                   }
               </select>                     
             </div>
@@ -258,35 +288,35 @@ export default function BookingPage() {
                   <label className="form-label " htmlFor="owner-name">
                     飼主姓名
                   </label>
-                  <span id="owner-name" className="form-control-plaintext">{state.userName}</span>
+                  <span id="owner-name" className="form-control-plaintext">{state.user.userName}</span>
                 </div>
                 <div className="mb-3">
                   <label className="form-label" htmlFor="species">
                     預約物種
                   </label>
-                  <span id="species" className="form-control-plaintext">{speciesLabels[state.submitData.species-1]}</span>
+                  <span id="species" className="form-control-plaintext">{state.appointment.submitData.species?speciesLabels[state.appointment.submitData.species-1]:'未選擇'}</span>
                 </div>
                 <div className="mb-3">
                   <label className="form-label" htmlFor="category">
                     預約科別
                   </label>
-                  <span id="category" className="form-control-plaintext">{departmentLabels[state.submitData.department-1]}</span>
+                  <span id="category" className="form-control-plaintext">{state.appointment.submitData.department?departmentLabels[state.appointment.submitData.department-1]:'未選擇'}</span>
                 </div>
                 <div className="mb-3">
                   <label className="form-label" htmlFor="appointment-date">
                     預約時間
                   </label>
-                  <span id="appointment-date" className="form-control-plaintext">{state.submitData.appointmentDateTime}</span>
+                  <span id="appointment-date" className="form-control-plaintext">{state.appointment.submitData?state.appointment.submitData.appointmentDateTime:'未選擇'}</span>
                 </div>
                 <div className="mb-3">
                   <label className="form-label" htmlFor="pet-name">
                     寵物名稱
                   </label>
-                  <span id="pet-name" className="form-control-plaintext">{state.petOptions.map(pet=>{
-                    if(pet.id==state.submitData.petsId){
+                  <span id="pet-name" className="form-control-plaintext">{state.appointment.submitData.petsId?state.pet.petOptions.map(pet=>{
+                    if(pet.id==state.appointment.submitData.petsId){
                       return pet.petName
                     }
-                  })}</span>
+                  }):'未選擇'}</span>
                 </div>
               </div>
               <div className="modal-footer">
