@@ -1,6 +1,6 @@
 import { useEffect, useReducer, useRef} from "react";
 import { Controller, useForm } from "react-hook-form";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Modal } from 'bootstrap';
 import axios from 'axios';
 import Navbar from "../components/common/NavBar";
@@ -9,6 +9,7 @@ import api from "@/services/api";
 
 export default function BookingPage() {
     const location = useLocation();
+    const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const appointmentModalRef = useRef(null);
     const modalInstanceRef = useRef(null);
@@ -76,23 +77,36 @@ export default function BookingPage() {
     };
     
     useEffect(()=>{
-      const isBookingPage = location.pathname.includes("/booking");
+      const isBookingPage = location.pathname.includes("/booking")||location.pathname.includes("/Booking");
       const urlParams = Object.fromEntries(searchParams);
+      if (isNaN(urlParams.clinicId)) {
+        navigate("/404");
+        return;
+      }
+      console.log("data = location.state", location.state)
       
+      console.log("!location.state", !location.state)
       const fetchData = async() => {
       if(isBookingPage){
         try{
-            const data =  await api.get(`/vetClinics/${urlParams['clinicId']}`)
+            let data;
+            if(!location.state){
+              const fetchData =  await api.get(`/vetClinics/${urlParams['clinicId']}`)
+              data = fetchData.data
+            }else{
+              data = location.state
+            }
+            
             const petData =  await api.get(`/pets?userId=1`)
-            const businessHours = data.data.businessHours
+            const businessHours = data.businessHours
             const day = new Date().getDay();
 
             dispatch({
               clinic: {
-                clinicsData:data.data,
+                clinicsData:data,
                 vetClinicsId:Number(urlParams['clinicId']),
-                serviceOptions:data.data.services.map(item=>item.id),
-                speciesOptions:data.data.treatedAnimals.map(item=>item.id)
+                serviceOptions:data.services.map(item=>item.id),
+                speciesOptions:data.treatedAnimals.map(item=>item.id)
               },
               pet:{
                 petOptions:petData.data.map(pet=>({id:pet.id,petName:pet.name}))

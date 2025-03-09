@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useMemo } from "react";
 import backgroundImage from "@/assets/images/veterinary/8.jpg";
 import banner01 from "@/assets/images/veterinary/banner01.png";
@@ -20,8 +20,10 @@ const SlideText = ({ text, index }) => (
 );
 
 const VetHeader = ({ clinicData }) => {
+  const navigate = useNavigate();
   const [index, setIndex] = useState(0);
   const currentSlide = useMemo(() => heading[index], [index]);
+
 
   useEffect(() => {
     const interval = setInterval(() => setIndex((i) => (i + 1) % heading.length), 3000);
@@ -59,7 +61,12 @@ const VetHeader = ({ clinicData }) => {
                 {currentSlide.text3}
               </h6>
             </span>
-            <Link to="/" className="btn btn-m btn-primary w-135">立即預約</Link>
+            <span className="btn btn-m btn-primary w-135"
+            onClick={()=>navigate(`/booking?clinicId=${clinicData.id}`, { state: clinicData })}
+            >
+              立即預約
+            </span>
+            {/* <Link to="/" className="btn btn-m btn-primary w-135">立即預約</Link> */}
           </div>
         </div>
       </div>
